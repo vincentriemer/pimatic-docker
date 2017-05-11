@@ -30,6 +30,14 @@ RUN chmod +x /etc/init.d/pimatic
 RUN chown root:root /etc/init.d/pimatic
 RUN update-rc.d pimatic defaults
 
+####### Install pimatic-hap Correctly #######
+RUN cd /home/pimatic-app/ && \
+  npm install pimatic-hap && \
+  cd node_modules/pimatic-hap && \
+  npm install && \
+  cd node_modules/hap-nodejs && \
+  npm install
+
 ####### Copy entrypoint script to container #######
 COPY entrypoint.sh /scripts/entrypoint.sh
 
